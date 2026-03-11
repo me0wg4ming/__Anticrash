@@ -2,7 +2,6 @@ local PREFIX = "|cffff0000!!|r|cffaa00ffAnticrash|r"
 
 Anticrash_SavedData = Anticrash_SavedData or {}
 
-local isLogout = false
 local count = 0
 
 local function CrawlFrame(frame)
@@ -24,15 +23,10 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGOUT")
-f:RegisterEvent("PLAYER_LEAVING_WORLD")
 f:RegisterEvent("VARIABLES_LOADED")
 f:SetScript("OnEvent", function()
-  if event == "PLAYER_LEAVING_WORLD" then
-    isLogout = true
-  elseif event == "PLAYER_LOGOUT" then
-    if isLogout then
-      DoShutdown()
-    end
+  if event == "PLAYER_LOGOUT" then
+    DoShutdown()
   elseif event == "VARIABLES_LOADED" then
     if Anticrash_SavedData.lastCount then
       f.loginTimer = 0
