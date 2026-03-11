@@ -19,6 +19,7 @@ local function DoShutdown()
   count = 0
   CrawlFrame(UIParent)
   Anticrash_SavedData.lastCount = count
+  Anticrash_SavedData.logoutTime = GetTime()
 end
 
 local f = CreateFrame("Frame")
@@ -28,7 +29,7 @@ f:SetScript("OnEvent", function()
   if event == "PLAYER_LOGOUT" then
     DoShutdown()
   elseif event == "VARIABLES_LOADED" then
-    if Anticrash_SavedData.lastCount then
+    if Anticrash_SavedData.logoutTime then
       f.loginTimer = 0
       f.showMessage = true
     end
@@ -40,5 +41,6 @@ f:SetScript("OnUpdate", function()
   f.loginTimer = (f.loginTimer or 0) + arg1
   if f.loginTimer < 2 then return end
   f.showMessage = false
-  DEFAULT_CHAT_FRAME:AddMessage(PREFIX .. " |cffff0000UNREGISTERED " .. Anticrash_SavedData.lastCount .. " FRAMES BEFORE LAST LOGOUT|r")
+  local elapsed = string.format("%.2f", GetTime() - Anticrash_SavedData.logoutTime)
+  DEFAULT_CHAT_FRAME:AddMessage(PREFIX .. " |cffff0000" .. Anticrash_SavedData.lastCount .. " frames, reload took " .. elapsed .. "s|r")
 end)
