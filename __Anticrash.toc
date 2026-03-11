@@ -1,7 +1,7 @@
 ## Interface: 11200
-## Title: |cffff0000__|r|cffaa00ffAnticrash|r
-## Notes: Unregisters all frame events before logout/reload to prevent crashes
-## Author: Meow [me0wg4ming]
+## Title: |cffff0000!!|r|cffaa00ffAnticrash|r
+## Notes: Unregisters all frame events before logout to prevent Nampower crashes
 ## LoadOnDemand: 0
+## SavedVariables: Anticrash_SavedData
 
 __Anticrash.lua
