@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Author: me0wg4ming
 ## Title: |cffff0000__|r|cffaa00ffAnticrash|r
-## Notes: Unregisters all frame events before logout/reload to prevent Nampower crashes
+## Notes: Unregisters all frame events before logout/reload to prevent crashes
 ## LoadOnDemand: 0
 
 __Anticrash.lua
