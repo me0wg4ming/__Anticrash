@@ -5,13 +5,18 @@ Anticrash_SavedData = Anticrash_SavedData or {}
 local count = 0
 
 local function CrawlFrame(frame)
-  if frame.UnregisterAllEvents then
-    frame:UnregisterAllEvents()
-    count = count + 1
-  end
-  local children = {frame:GetChildren()}
-  for i = 1, table.getn(children) do
-    CrawlFrame(children[i])
+  local ok, err = pcall(function()
+    if frame.UnregisterAllEvents then
+      frame:UnregisterAllEvents()
+      count = count + 1
+    end
+  end)
+  -- Safely get children; skip this branch if the frame is in a bad state
+  local ok2, children = pcall(frame.GetChildren, frame)
+  if ok2 and children then
+    for i = 1, table.getn(children) do
+      CrawlFrame(children[i])
+    end
   end
 end
 
